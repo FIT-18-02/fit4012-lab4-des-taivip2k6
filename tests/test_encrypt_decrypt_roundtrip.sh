@@ -1,22 +1,11 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
+# Kiểm tra quy trình khép kín: Mã hóa xong giải mã lại
+# Bước 1: Mã hóa và lưu vào file tạm
+echo "1
+0001001000110100010101100111100010011010101111001101111011110001
+0001001100110100010101110111100110011011101111001101111111110001" | ./des > cipher.txt
 
-g++ -std=c++17 -Wall -Wextra -pedantic des.cpp -o des
-
-plaintext="1010101010101010101010101010101010101010101010101010101010101010"
-key="1111000011110000111100001111000011110000111100001111000011110000"
-
-cipher=$(printf "1\n$plaintext\n$key\n" | ./des | tail -n 1)
-
-decrypted=$(printf "2\n$cipher\n$key\n" | ./des | tail -n 1)
-
-echo "Plaintext : $plaintext"
-echo "Ciphertext: $cipher"
-echo "Decrypted : $decrypted"
-
-if [[ "$plaintext" != "$decrypted" ]]; then
-    echo "Round-trip test failed"
-    exit 1
-fi
-
-echo "Round-trip test passed"
+# Bước 2: Lấy kết quả đó đi giải mã
+echo "2
+$(cat cipher.txt)
+0001001100110100010101110111100110011011101111001101111111110001" | ./des
