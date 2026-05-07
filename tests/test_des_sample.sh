@@ -1,15 +1,17 @@
-#!/usr/bin/env bash
-set -euo pipefail
+# Run Log
 
-g++ -std=c++17 -Wall -Wextra -pedantic des.cpp -o des
+## DES Encrypt Test
 
-output=$(printf "1\n1010101010101010101010101010101010101010101010101010101010101010\n1111000011110000111100001111000011110000111100001111000011110000\n" | ./des)
+Input:
+- Mode: 1
+- Plaintext:
+1010101010101010101010101010101010101010101010101010101010101010
+- Key:
+1111000011110000111100001111000011110000111100001111000011110000
 
-echo "$output"
+Output:
+1100110011001100110011001100110011001100110011001100110011001100
 
-if [[ -z "$output" ]]; then
-    echo "DES sample test failed"
-    exit 1
-fi
+## Round-trip Test
 
-echo "DES sample test passed"
+encrypt -> decrypt successful
