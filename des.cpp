@@ -185,7 +185,7 @@ int main() {
         } else {
             cout << des.decrypt(input, k1) << endl;
         }
-    }  
+    } 
     else if (mode == 3 || mode == 4) {
         if (!(cin >> input >> k1 >> k2 >> k3)) return 0;
         if (mode == 3) {
