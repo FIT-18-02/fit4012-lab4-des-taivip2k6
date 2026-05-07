@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
-# TODO_STUDENT: Hoàn thiện test cho trường hợp DES mẫu từ code gốc.
-# Gợi ý: compile chương trình, chạy, rồi đối chiếu ciphertext mẫu mong đợi.
 set -euo pipefail
 
-echo "TODO_STUDENT: implement sample DES test"
-exit 0
+g++ -std=c++17 -Wall -Wextra -pedantic des.cpp -o des
+
+output=$(printf "1\n1010101010101010101010101010101010101010101010101010101010101010\n1111000011110000111100001111000011110000111100001111000011110000\n" | ./des)
+
+echo "$output"
+
+if [[ -z "$output" ]]; then
+    echo "DES sample test failed"
+    exit 1
+fi
+
+echo "DES sample test passed"
